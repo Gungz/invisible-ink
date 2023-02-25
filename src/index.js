@@ -3,6 +3,7 @@
 const fs = require('fs');
 const express = require('express');
 const app = express();
+app.disable('x-powered-by');
 const bodyParser = require('body-parser');
 const _ = require('lodash');
 const csrf = require('csurf');
@@ -13,10 +14,6 @@ const flag = fs.readFileSync('./flag', 'utf-8').trim();
 const docHtml = fs.readFileSync('./src/index.html', 'utf-8');
 
 app.use(bodyParser.json());
-app.use(function(req, res, next){
-  res.removeHeader("X-Powered-By");
-  next();
-});
 
 app.get('/', (req, res) => {
     res.send(docHtml);
